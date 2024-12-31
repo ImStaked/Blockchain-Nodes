@@ -1,0 +1,53 @@
+[Unit]
+Description="MoonRiver Archive w/tracing"
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=on-failure
+RestartSec=10
+User=moonriver_service
+SyslogIdentifier=moonriver
+SyslogFacility=local7
+KillSignal=SIGHUP
+ExecStart=/usr/local/bin/moonbeam \
+     --base-path /var/lib/moonriver-data \
+     --chain moonriver \
+     --database paritydb \
+     --sync full \
+     --state-pruning archive \
+     --blocks-pruning archive \
+     --port 30333 \
+     --in-peers-light 15 \
+     --in-peers 25 \
+     --out-peers 20 \
+     --rpc-port 9933 \
+     --unsafe-rpc-external \
+     --rpc-methods Safe \
+     --rpc-cors all \
+     --rpc-max-connections 1000 \
+     --rpc-max-subscriptions-per-connection 500 \
+     --max-runtime-instances 16 \
+     --ethapi-max-permits 250 \
+     --trie-cache-size 1073741824 \
+     --db-cache 10000 \
+     --runtime-cache-size 32 \
+     --wasm-execution compiled \
+     --ethapi=debug,trace,txpool \
+     --max-past-logs 25000 \
+     --tracing-raw-max-memory-usage 50000000 \
+     --wasm-runtime-overrides=/var/lib/moonriver-data/wasm \
+     --ethapi-trace-max-count 1000 \
+     --ethapi-trace-cache-duration 900 \
+     --eth-statuses-cache 600000000 \
+     --eth-log-block-cache 600000000 \
+     --no-telemetry \
+     --no-private-ip \
+     --no-mdns \
+     --no-hardware-benchmarks \
+     --name "ImStaked" \
+     --relay-chain-rpc-urls=wss://rpc.polkadot.io
+
+[Install]
+WantedBy=multi-user.target
