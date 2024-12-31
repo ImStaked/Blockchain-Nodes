@@ -23,7 +23,7 @@ chown moonriver_service /var/lib/moonriver-data/wasm/*
 
 # Enable and Start
 systemctl enable moonriver.service
-root@earth ~ # systemctl start moonriver
+systemctl start moonriver
 
 
 
