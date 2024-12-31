@@ -1,21 +1,6 @@
 #!/bin/bash
 
-# Install a FetchAI node with cosmovisor so it will hopefully update itself.
-
-PRIVATE_IP="10.0.1.3"
-
-# Update and install prerequisites
-sudo apt update && sudo apt upgrade -y
-sudo apt-get install -y make gcc lz4
-
-# Install golang version 1.23.4
-wget https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.23.4.linux-amd64.tar.gz
-rm go1.23.4.linux-amd64.tar.gz
-
-# Create user and login
-useradd -U -m -d /home/fetch -s /bin/bash fetch
-su fetch && cd ~
+# Setup fetch node
 
 # Add go to the environment
 echo "export PATH=\$PATH:/usr/local/go/bin:/home/fetch/go/bin" >> ~/.bashrc
