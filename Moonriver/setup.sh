@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# Sets up an Archival Node with Tracing
 
 # Download Binary and Install
 wget https://github.com/moonbeam-foundation/moonbeam/releases/download/v0.42.1/moonbeam -O /usr/local/bin/moonbeam
@@ -18,8 +21,9 @@ rm /var/lib/moonriver-data/wasm/moonbeam-runtime-* &&  rm /var/lib/moonriver-dat
 chmod +x /var/lib/moonriver-data/wasm/*
 chown moonriver_service /var/lib/moonriver-data/wasm/*
 
-
-
+# Enable and Start
+systemctl enable moonriver.service
+root@earth ~ # systemctl start moonriver
 
 
 
