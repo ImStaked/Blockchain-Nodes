@@ -2,6 +2,7 @@
 
 # Install a FetchAI node with cosmovisor so it will hopefully update itself.
 
+PRIVATE_IP="10.0.1.3"
 
 # Update and install prerequisites
 sudo apt update && sudo apt upgrade -y
@@ -48,6 +49,21 @@ wget https://snapshots.polkachu.com/snapshots/fetch/fetch_19884219.tar.lz4 -O - 
 curl https://raw.githubusercontent.com/fetchai/genesis-fetchhub/fetchhub-4/fetchhub-4/data/genesis_migrated_5300200.json --output ~/.fetchd/config/genesis.json
 
 
-# In app.toml change pruning to everything and set gas fee
-# In config.toml setup State Sync, peers, metrics, and ips
+# Customize app.toml
+sed -i "s|minimum-gas-prices = \"\"|minimum-gas-prices = \"0.002afet\"|g"  ~/.fetchd/config/app.toml
+sed -i "s|pruning = \"default\"|pruning = \"everything\"|g"  ~/.fetchd/config/app.toml
 
+# Customize config.toml
+SNAP_RPC="https://rpc-fetchhub.fetch.ai:443,https://fetch-rpc.polkachu.com:443"
+
+LATEST_HEIGHT=$(curl -s $SNAP_RPC/block | jq -r .result.block.header.height); \
+BLOCK_HEIGHT=$((LATEST_HEIGHT - 2000)); \
+TRUST_HASH=$(curl -s "$SNAP_RPC/block?height=$BLOCK_HEIGHT" | jq -r .result.block_id.hash)
+
+sed -i.bak -E "s|^(enable[[:space:]]+=[[:space:]]+).*$|\1true| ; \
+s|^(rpc_servers[[:space:]]+=[[:space:]]+).*$|\1\"$SNAP_RPC,$SNAP_RPC\"| ; \
+s|^(trust_height[[:space:]]+=[[:space:]]+).*$|\1$BLOCK_HEIGHT| ; \
+s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/.fetchd/config/config.toml
+
+sed -i "s|prometheus = false|prometheus = true|g"  ~/.fetchd/config/config.toml
+sed -i "s|prometheus_listen_addr = \":26660\"|prometheus_listen_addr = \"$PRIVATE_IP:26660\"|g"  ~/.fetchd/config/config.toml
