@@ -9,6 +9,7 @@ mkdir /var/lib/moonriver-data
 # Setup Service
 adduser moonriver_service --system --no-create-home
 sudo chown -R moonriver_service /var/lib/moonriver-data
+wget https://raw.githubusercontent.com/ImStaked/Blockchain-Nodes/refs/heads/main/Moonriver/moonriver.service -O /etc/systemd/system/moonriver.service
 
 # Setup wasm overrides
 git clone https://github.com/moonbeam-foundation/moonbeam-runtime-overrides.git
