@@ -1,0 +1,36 @@
+[Unit]
+Description=Darwinia Tracing Node
+
+[Service]
+User=darwinia
+Group=darwinia  
+ExecStart=/usr/local/bin/darwinia \
+    --chain=darwinia \
+    --name= \
+    --base-path=/home/darwinia/.data \
+    --state-pruning=archive \
+    --blocks-pruning=archive \
+    --db-cache=128 \
+    --trie-cache-size=107108864 \
+    --runtime-cache-size=8 \
+    --frontier-backend-type=sql \
+    --rpc-cors=all \
+    --rpc-external \
+    --rpc-max-connections=5000 \
+    --rpc-message-buffer-capacity-per-connection=128 \
+    --rpc-max-subscriptions-per-connection=2048 \
+    --rpc-max-response-size=32 \
+    --rpc-max-request-size=32 \
+    --prometheus-external \
+    --prometheus-port=8999 \
+    --max-runtime-instances 16 \
+    --no-private-ip \
+    --no-telemetry \
+    --no-mdns \
+    --relay-chain-rpc-urls=wss://rpc.polkadot.io
+    
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
