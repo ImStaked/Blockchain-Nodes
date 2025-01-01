@@ -16,4 +16,11 @@ git clone https://github.com/darwinia-network/darwinia && cd darwinia
 - Compile
 ```
 cargo build --release --locked -p darwinia --features darwinia-runtime,crab-runtime,evm-tracing
+cp target/release/darwinia /usr/local/bin/darwinia
+```
+
+
+- Chainspec
+```
+darwinia build-chainspec
 ```
