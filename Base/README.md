@@ -1,11 +1,15 @@
 # Base
 
 ## Archive Node
--  Make directory for base node data  
-  ```mkdir -p /data/base/reth```
+- Make directory for base node data  
+  ```
+  mkdir -p /data/base/reth
+  ```
 
 - Download the data  
-  ```curl -s https://mainnet-reth-archive-snapshots.base.org/base-mainnet-reth-1743919902.tar.zst | tar -I zstd -xv -C /data/base/reth/```
+  ```
+  curl -s https://mainnet-reth-archive-snapshots.base.org/base-mainnet-reth-1743919902.tar.zst | tar -I zstd -xv -C /data/base/reth/
+  ```
 
 - Compile Base Node  
   ```
