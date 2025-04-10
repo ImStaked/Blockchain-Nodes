@@ -1,12 +1,13 @@
 [Unit]
-Description=Optimism Node (Consensus)
+Description=Base (OP-NODE)
+Documentation=https://docs.optimism.io/operators/node-operators/tutorials/run-node-from-source
 After=network-online.target
 
 [Service]
-User=optimism
-Group=optimism
-Environment=HOME=/data/base/.op-node
-EnvironmentFile=/etc/environment
+User=base
+Group=base
+Environment=HOME=/data/base/op-node
+EnvironmentFile=/data/base/.env.mainnet
 Type=simple
 ExecStart=/usr/local/bin/op-node
 LimitNOFILE=8192
