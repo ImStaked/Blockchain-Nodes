@@ -7,7 +7,7 @@ After=network-online.target
 User=base
 Group=base
 ExecStart=/usr/local/bin/reth node \
-  --datadir /data/base/reth \
+  --datadir /data/base/.data \
   --chain base \
   --identity ImStaked \
   --port 39993 \
@@ -23,20 +23,20 @@ ExecStart=/usr/local/bin/reth node \
   --http.api debug,eth,net,trace,txpool,web3,rpc,reth,ots \
   --authrpc.addr 127.0.0.1 \
   --authrpc.port 18551 \
-  --authrpc.jwtsecret /data/base/reth/jwt.hex \
+  --authrpc.jwtsecret /data/base/.data/jwt.hex \
   --metrics 10.0.1.10:8669 \
   --rollup.sequencer-http https://mainnet-sequencer.base.org \
   --rollup.disable-tx-pool-gossip \
-  --rpc.max-blocks-per-filter 1000 \
+  --rpc.max-blocks-per-filter 100000 \
   --rpc.max-response-size 100 \
-  --rpc.max-logs-per-response 1000 \
+  --rpc.max-logs-per-response 20000 \
   --rpc.max-subscriptions-per-connection 2048 \
   --rpc-cache.max-blocks 7500 \
   --rpc-cache.max-receipts 4000 \
   --rpc.max-connections 5000 \
   --rpc-cache.max-headers 2000 \
   --rpc-cache.max-concurrent-db-requests 1024 \
-  --rpc.max-tracing-requests 5 \
+  --rpc.max-tracing-requests 10 \
   --db.max-size 4TB \
   --db.read-transaction-timeout 10 \
   --log.stdout.format log-fmt 
