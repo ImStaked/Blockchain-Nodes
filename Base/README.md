@@ -33,12 +33,14 @@
     cd /data/base
     ```
 
-  ## GET DATA 
+  ## DATA restore
   - Merkle.io provides an reth snapshot that it is updated 2x per week
-    ```
-    wget -O - https://downloads.merkle.io/reth-2025-04-07.tar.lz4 | tar -I lz4 -xvf -C /data/base/restore
-    mv /data/base/restore/* /data/base/.data
-    ```
+  ```
+  wget -O - https://downloads.merkle.io/reth-2025-04-07.tar.lz4 | tar -I lz4 -xvf -C /data/base/restore &
+  ```
+  ```
+  mv /data/base/restore/* /data/base/.data
+  ```
     
   ## Start services
     ```
