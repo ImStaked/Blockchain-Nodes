@@ -6,8 +6,8 @@ After=network-online.target
 [Service]
 User=base
 Group=base
-Environment=HOME=/data/base/op-node
-EnvironmentFile=/data/base/.env.mainnet
+Environment=HOME=/data/base/.data
+EnvironmentFile=/data/base/.data/.env.mainnet
 Type=simple
 ExecStart=/usr/local/bin/op-node
 LimitNOFILE=8192
@@ -16,9 +16,9 @@ KillSignal=SIGINT
 TimeoutStopSec=90
 Restart=on-failure
 RestartSec=10s
+SyslogIdentifier=op-node
 #StandardOutput=null
 #StandardError=null
-SyslogIdentifier=op-node
 
 [Install]
 WantedBy=multi-user.target
