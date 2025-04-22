@@ -12,7 +12,7 @@ ExecStart=/usr/local/bin/darwinia \
     --blocks-pruning=archive \
     --db-cache=128 \
     --trie-cache-size=107108864 \
-    --runtime-cache-size=8 \
+    --runtime-cache-size=64 \
     --frontier-backend-type=sql \
     --rpc-cors=all \
     --rpc-external \
@@ -27,6 +27,8 @@ ExecStart=/usr/local/bin/darwinia \
     --no-private-ip \
     --no-telemetry \
     --no-mdns \
+    --wasm-runtime-overrides=/home/darwinia/.data/overridden-runtimes \
+    --tracing-api=debug,trace \
     --relay-chain-rpc-urls=wss://rpc.polkadot.io
     
 Restart=always
