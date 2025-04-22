@@ -29,10 +29,10 @@ darwinia build-chainspec
 - Get overridden-runtimes
 ```
 mkdir run-evm-tracing-node && cd run-evm-tracing-node
-mkdir overridden-runtimes 
+mkdir /home/darwinia/.data/overridden-runtimes 
 git clone https://github.com/darwinia-network/darwinia-release.git
 cd darwinia-release
 git checkout origin/darwinia
 # Copy the wasm runtime files to the temporary workaround override runtime location 
-cp wasm/evm-tracing/* ../overridden-runtimes/
+cp wasm/evm-tracing/* /home/darwinia/.data/overridden-runtimes
 ```
