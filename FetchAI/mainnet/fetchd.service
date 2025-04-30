@@ -11,9 +11,12 @@ LimitNOFILE=4096
 Environment="DAEMON_NAME=fetchd"
 Environment="DAEMON_HOME=/home/fetch/.fetchd"
 Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=true"
+Environment="DAEMON_DOWNLOAD_MUST_HAVE_CHECKSUM=false"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
 Environment="DAEMON_LOG_BUFFER_SIZE=512"
 Environment="UNSAFE_SKIP_BACKUP=true"
+Environment="COSMOVISOR_DISABLE_LOGS=false"
+Environment="COSMOVISOR_DISABLE_RECASE=false"
 
 [Install]
 WantedBy=multi-user.target
