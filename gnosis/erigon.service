@@ -1,0 +1,58 @@
+[Unit]
+Description=Erigon (Gnosis)
+
+[Service]
+User=gnosis
+Group=gnosis
+ExecStart=/usr/local/bin/erigon_v3.0.3 \
+    --chain=gnosis \
+    --identity= \
+    --nat="extip:???" \
+    --datadir=/home/gnosis/.gnosis \
+    --log.dir.path=/home/gnosis/.gnosis/logs \
+    --authrpc.jwtsecret=/home/gnosis/.gnosis/jwt.hex \
+    --http \
+    --http.addr=10.0.1. \
+    --http.port=5587 \
+    --http.vhosts="*" \
+    --http.corsdomain="*" \
+    --http.api=eth,erigon,web3,net,debug,trace,txpool,ots \
+    --ws \
+    --ws.port=5588 \
+    --authrpc.addr=10.0.1 \
+    --authrpc.port=5589 \
+    --metrics \
+    --metrics.addr=10.0.1. \
+    --metrics.port=5599 \
+    --port=33303 \
+    --p2p.allowed-ports=33303,33304,33305,33306 \
+    --downloader.disable.ipv6=true \
+    --torrent.download.rate=10mb \
+    --db.size.limit=2700GB \
+    --caplin.blocks-archive=false \
+    --caplin.blobs-archive=false \
+    --caplin.states-archive=false \
+    --rpc.evmtimeout=60s \
+    --rpc.overlay.getlogstimeout=60s \
+    --rpc.overlay.replayblocktimeout=12s \
+    --caplin.discovery.addr=0.0.0.0 \
+    --caplin.discovery.port=4000 \
+    --caplin.discovery.tcpport=4001 \
+    --caplin.max-peer-count=40 \
+    --caplin.max-inbound-traffic-per-peer=2MB \
+    --caplin.max-outbound-traffic-per-peer=2MB \
+    --caplin.adaptable-maximum-traffic-requirements=true \
+    --batchSize=2048M \
+    --bodies.cache=352653184 \
+    --rpc.streaming.disable=true \
+    --rpc.batch.concurrency=15
+
+
+#StandardOutput=null
+#StandardError=null
+LimitNOFILE=32192
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
